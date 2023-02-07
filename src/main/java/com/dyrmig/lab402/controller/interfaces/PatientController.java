@@ -10,5 +10,6 @@ public interface PatientController {
     List<Patient> getPatientsByDoctorDepartment(String department);
     List<Patient> getPatientsByDoctorStatus(String status);
     List<Patient> getPatientsByDOB(String from, String till);
-
+    Patient store(Patient patient);
+    void update(Integer patientId, Patient patient);
 }

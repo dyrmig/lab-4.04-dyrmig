@@ -1,13 +1,12 @@
 package com.dyrmig.lab402.controller.impl;
 
 import com.dyrmig.lab402.controller.interfaces.PatientController;
+import com.dyrmig.lab402.controller.service.interfaces.PatientService;
 import com.dyrmig.lab402.model.Patient;
 import com.dyrmig.lab402.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
@@ -15,6 +14,8 @@ import java.util.List;
 public class PatientControllerImpl implements PatientController {
     @Autowired
     private PatientRepository patientRepository;
+    @Autowired
+    private PatientService patientService;
     @GetMapping("/")
     public List<Patient> getAllPatients() {
         return patientRepository.findAll();
@@ -34,5 +35,17 @@ public class PatientControllerImpl implements PatientController {
     @GetMapping("/dob/{from}/{till}")
     public List<Patient> getPatientsByDOB(@PathVariable(name = "from") String from, @PathVariable(name = "till") String till) {
         return patientRepository.getPatientsByDOB(from, till);
+    }
+
+    @PostMapping("/")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Patient store(@RequestBody Patient patient) {
+        return patientRepository.save(patient);
+    }
+
+    @PutMapping("/{patientId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@PathVariable Integer patientId, @RequestBody Patient patient) {
+        patientService.update(patientId, patient);
     }
 }

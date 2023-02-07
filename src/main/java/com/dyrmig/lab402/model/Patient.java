@@ -15,7 +15,10 @@ public class Patient {
 
     public Patient() {
     }
-
+    public Patient(String name, String dateOfBirth) {
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+    }
     public Patient(String name, String dateOfBirth, Employee admittedBy) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;

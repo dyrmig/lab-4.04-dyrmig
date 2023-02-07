@@ -1,7 +1,11 @@
 package com.dyrmig.lab402.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
+import java.util.List;
 
 @Entity
 public class Employee {
@@ -10,6 +14,9 @@ public class Employee {
     private String department;
     private String name;
     private String status;
+  /*  @OneToMany(mappedBy = "admittedBy")
+    @JsonIgnore
+    private List<Patient> patientList;*/
 
     public Employee() {
     }
@@ -51,4 +58,12 @@ public class Employee {
     public void setStatus(String status) {
         this.status = status;
     }
+/*
+    public List<Patient> getPatientList() {
+        return patientList;
+    }
+
+    public void setPatientList(List<Patient> patientList) {
+        this.patientList = patientList;
+    }*/
 }
